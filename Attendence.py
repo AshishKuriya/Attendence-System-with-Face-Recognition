@@ -76,7 +76,4 @@ while True:
            # markAttendance(name)
             print(name)
     cv2.imshow("Webcam", img)
-    key = cv2.waitKey(27)
-    if key == 27:
-        break
-    cv2.destroyWindow("Webcam")
+    cv2.waitKey(27)
