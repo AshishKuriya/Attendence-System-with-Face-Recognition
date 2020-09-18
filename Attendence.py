@@ -1,9 +1,9 @@
-import cv2
-import numpy as np
-import face_recognition
 import os
-from PIL import Image
 from datetime import datetime
+
+import cv2
+import face_recognition
+import numpy as np
 
 path = 'ImagesAttendance'
 images = []
@@ -27,17 +27,17 @@ def findEncodings(images):
 
 
 def markAttendance(name):
-    with open("Attendance.csv", 'xr+') as f:
-        myDataList = f.readlines()
-        nameList = []
-        for line in myDataList:
+   with open("Attendance.csv", 'r+') as f:
+       myDataList = f.readlines()
+       nameList = []
+       for line in myDataList:
             entry = line.split(',')
             nameList.append(entry[0])
-        if name not in nameList:
+       if name not in nameList:
             now = datetime.now()
             dtString = now.strftime('%H:%M:%S')
             f.writelines(f'\n{name},{dtString}')
-
+            #print(name,"    ",dtString)
 
 #### FOR CAPTURING SCREEN RATHER THAN WEBCAM
 # def captureScreen(bbox=(300,300,690+300,530+300)):
@@ -73,7 +73,7 @@ while True:
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
             cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 255, 0), cv2.FILLED)
             cv2.putText(img, name, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
-           # markAttendance(name)
-            print(name)
+            markAttendance(name)
+           # print(name)
     cv2.imshow("Webcam", img)
-    cv2.waitKey(27)
+    cv2.waitKey(1)
