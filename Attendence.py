@@ -35,8 +35,8 @@ def markAttendance(name):
             nameList.append(entry[0])
         if name not in nameList:
             now = datetime.now()
-            dtString = now.strftime('%H:%M:%S')
-            f.writelines(f'\n{name},{dtString}')
+            dtString = now.strftime('%H:%M:%S , %d/%m/%Y')
+            f.writelines(f'\n{name}, {dtString}')
 
 
 #### FOR CAPTURING SCREEN RATHER THAN WEBCAM
